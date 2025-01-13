@@ -1,7 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 body {
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Roboto", serif;
   margin: 0;
   padding: 0;
   background-color: #5e7594;
@@ -28,7 +27,7 @@ main {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Roboto", serif;
   font-size: 16px;
   border-radius: 8px;
   transition: all 0.15s ease;
@@ -53,7 +52,7 @@ main {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-family: "Inter", Arial, sans-serif;
+  font-family: "Roboto", serif;
   font-size: 16px;
   border-radius: 8px;
   transition: all 0.15s ease;
@@ -73,13 +72,13 @@ main {
 }
 
 a {
-  color: #f1a727; /* change to match your theme */
+  color: #f1a727;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 a:hover {
-  color: #f1d41d; /* change to match your theme */
+  color: #f1d41d;
 }
 
 /* Scrollbar settings */

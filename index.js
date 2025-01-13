@@ -12,15 +12,14 @@ const tokenLimit = 498000;
 let tokenUsage = 0;
 
 const modelData = `
-llama3-groq-70b-8192-tool-use-preview
-llama3-groq-8b-8192-tool-use-preview
+gemma2-9b-it
+llama-3.3-70b-versatile
+llama-3.1-8b-instant
 llama3-70b-8192
 llama3-8b-8192
-gemma-7b-it
-gemma2-9b-it
-llama-3.1-70b-versatile
-llama-3.1-8b-instant
-llama-3.2-11b-text-preview
+mixtral-8x7b-32768
+llama-3.3-70b-specdec
+llama-3.2-1b-preview
 llama-3.2-3b-preview
 `
   .trim()
@@ -59,6 +58,8 @@ app.use((req, res, next) => {
   }
   next();
 });
+const apiKeys = [process.env.API_KEY, process.env.API_KEY1];
+randomAPIKey = apiKeys[Math.floor(Math.random() * apiKeys.length)];
 
 app.post("/api/chat", async (req, res) => {
   const { message, userId } = req.body;
@@ -81,7 +82,7 @@ app.post("/api/chat", async (req, res) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${process.env.API_KEY}`,
+          Authorization: `Bearer ${randomAPIKey}`,
           "Content-Type": "application/json",
         },
       },
@@ -98,7 +99,7 @@ app.post("/api/chat", async (req, res) => {
         },
         {
           headers: {
-            Authorization: `Bearer ${process.env.API_KEY}`,
+            Authorization: `Bearer ${randomAPIKey}`,
             "Content-Type": "application/json",
           },
         },
@@ -148,10 +149,7 @@ app.post("/api/chat", async (req, res) => {
 app.get("/api/usedTokens", (req, res) => {
   res.json({ usedTokens: tokenUsage, model: currentModel });
 });
-app.get("/api/switchModel", (req, res) => {
-  switchModel();
-  res.json({ model: currentModel });
-});
+
 app.post("/api/signUp", async (req, res) => {
   let { password, username, premium = false, captchaResponse } = req.body;
 
@@ -314,11 +312,23 @@ app.post("/api/readSave", async (req, res) => {
   }
 });
 
-app.use((req, res, next) => {
-  res.setHeader("X-Frame-Options", "SAMEORIGIN");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader("X-Frame-Options", "SAMEORIGIN");
+//   next();
+// });
 app.use(express.static(path.join(__dirname, "static")));
+app.use((req, res, next) => {
+  if (req.method === "GET" && !path.extname(req.url)) {
+    const filePath = path.join(__dirname, "static", req.url + ".html");
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        next();
+      }
+    });
+  } else {
+    next();
+  }
+});
 
 const routes = [
   { path: "/a", file: "apps.html" },

@@ -1,10 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", serif;
 }
 
 :root {
@@ -260,4 +259,21 @@ body {
   30% {
     opacity: 1;
   }
+}
+.prompt-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--button-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  transition: 0.2s;
+  margin-top: 10px;
+}
+
+.prompt-btn:hover {
+  background-color: var(--button-hover-bg);
+  scale: 1.1;
+  transition: 0.2s;
 }
